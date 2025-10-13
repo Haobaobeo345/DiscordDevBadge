@@ -2,22 +2,23 @@
 
 A simple Discord bot that helps you get the Discord Developer Badge by responding to the `/active` command.
 
-## Features
+## How to Use
 
-- `/active` command - Get the Discord Developer Badge link
+1. Run the bot - it will ask you questions in the console
+2. Answer "y" when asked if you opened community in your Discord server
+3. Paste your Discord bot token when asked
+4. Wait for "Finished!" message
+5. Use the `/active` command in your Discord server to get the Developer Badge link
 
-## Setup
+## Getting Your Bot Token
 
-1. Create a Discord bot at https://discord.com/developers/applications
-2. Enable the following settings:
-   - Bot permissions: Send Messages, Use Slash Commands
-   - OAuth2 URL Generator: `applications.commands` scope
-3. Add your bot token to the environment variables as `DISCORD_BOT_TOKEN`
-4. Invite the bot to your server
-5. Run the bot and use `/active` command
+1. Go to https://discord.com/developers/applications
+2. Click "New Application" and name it
+3. Go to "Bot" section → Click "Reset Token"
+4. Copy the token that appears
+5. Paste it when the bot asks for it
 
-## How to Get the Developer Badge
+## Setting Up Your Discord Server
 
-1. Use the `/active` command in your Discord server
-2. Click the link provided by the bot
-3. Follow the instructions on Discord's website to claim your badge
+- Make sure to enable Community features in your Discord server settings
+- Invite your bot with the "applications.commands" scope enabled
