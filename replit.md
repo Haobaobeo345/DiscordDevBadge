@@ -17,8 +17,10 @@ Preferred communication style: Simple, everyday language.
 **Interactive Setup Flow**: 
 - Uses Node.js `readline` interface to collect configuration interactively
 - Validates server community status before bot initialization
-- Prompts for bot token at runtime (no environment variable usage currently)
-- Implements input validation for setup questions
+- Prompts for bot token at runtime (no environment variable usage)
+- Implements input validation for setup questions (y/n answers, non-empty token)
+- Closes readline interface immediately after collecting inputs to prevent duplication
+- Bot process stays alive after setup to handle Discord commands (no auto-restart)
 
 ### Discord Integration
 

@@ -17,13 +17,13 @@ async function main() {
     if (answer.toLowerCase() !== 'y' && answer.toLowerCase() !== 'n') {
       console.log('Please answer y or n');
       rl.close();
-      return;
+      process.exit(1);
     }
     
     if (answer.toLowerCase() === 'n') {
       console.log('Please open community in your Discord server first, then run the bot again.');
       rl.close();
-      return;
+      process.exit(1);
     }
     
     const token = await question('Enter your bot token: ');
@@ -31,9 +31,10 @@ async function main() {
     if (!token || token.trim() === '') {
       console.log('Error: Bot token cannot be empty');
       rl.close();
-      return;
+      process.exit(1);
     }
     
+    rl.close();
     console.log('Setting up bot...');
     
     const client = new Client({
@@ -59,10 +60,8 @@ async function main() {
           { body: commands }
         );
         console.log('Finished!');
-        rl.close();
       } catch (error) {
         console.log('Error:', error.message);
-        rl.close();
         process.exit(1);
       }
     });
