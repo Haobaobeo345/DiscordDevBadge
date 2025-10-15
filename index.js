@@ -12,7 +12,7 @@ function question(query) {
 
 async function main() {
   try {
-    const answer = await question('Did u open community in discord server y/n? ');
+    const answer = await question('Did you open community in discord server y/n? ');
     
     if (answer.toLowerCase() !== 'y' && answer.toLowerCase() !== 'n') {
       console.log('Please answer y or n');
