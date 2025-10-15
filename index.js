@@ -71,8 +71,8 @@ async function main() {
       
       if (interaction.commandName === 'active') {
         await interaction.reply({
-          content: '🎉 **Discord Developer Badge**\n\nUse this bot and get your Discord Developer Badge!\n\n🔗 **Get your badge here:** https://discord.com/developers/active-developer',
-          ephemeral: false
+          content: 'Use this bot and get your Discord Developer Badge!\n\n🔗 **Get your badge here:**\nhttps://discord.com/developers/active-developer',
+          ephemeral: true
         });
       }
     });
