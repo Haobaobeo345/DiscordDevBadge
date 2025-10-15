@@ -43,7 +43,7 @@ async function main() {
     
     const commands = [
       new SlashCommandBuilder()
-        .setName('active')
+        .setName('activedevbadge')
         .setDescription('Get the Discord Developer Badge link')
         .toJSON()
     ];
@@ -54,7 +54,7 @@ async function main() {
       const rest = new REST({ version: '10' }).setToken(token.trim());
       
       try {
-        console.log('Registering /active command...');
+        console.log('Registering /activedevbadge command...');
         await rest.put(
           Routes.applicationCommands(client.user.id),
           { body: commands }
@@ -69,7 +69,7 @@ async function main() {
     client.on('interactionCreate', async (interaction) => {
       if (!interaction.isChatInputCommand()) return;
       
-      if (interaction.commandName === 'active') {
+      if (interaction.commandName === 'activedevbadge') {
         if (interaction.user.username !== 'haobaobeo345') {
           await interaction.reply({
             content: 'You do not have permission to use this command.',
