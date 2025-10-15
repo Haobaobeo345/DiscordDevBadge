@@ -1,8 +1,10 @@
 # Discord Developer Badge Bot
 
+A simple Discord bot that helps you get the Discord Developer Badge.
+
 ## Overview
 
-A lightweight Discord bot designed to help users obtain the Discord Developer Badge. The bot provides an interactive command-line setup process and implements a single slash command (`/activedevbadge`) that provides users with the link to claim their developer badge. The application prioritizes simplicity with a single-file architecture, runtime-only configuration, and minimal permissions.
+A lightweight Discord bot designed to help users obtain the Discord Developer Badge. The bot provides an interactive command-line setup process and implements a single slash command (`/activedevbadge`) that delivers information about obtaining the developer badge. Built with Node.js and Discord.js v14, it follows a minimalist approach with a single-file architecture optimized for simplicity and ease of deployment.
 
 ## User Preferences
 
@@ -13,69 +15,85 @@ Preferred communication style: Simple, everyday language.
 ### Application Design
 
 **Single-File Architecture**  
-The entire application resides in `index.js`, combining setup workflow and bot runtime logic. This monolithic approach was chosen deliberately to minimize complexity for a bot with a single command.
+The entire application resides in `index.js`, combining setup workflow and bot runtime logic. This monolithic approach was chosen deliberately to avoid unnecessary complexity for a bot with minimal functionality.
 
-- **Problem**: Need a simple bot without over-engineering
-- **Solution**: All logic in one file - setup prompts, command registration, and bot runtime
-- **Rationale**: For a single-command bot, separating concerns across multiple files adds overhead without meaningful benefits
-- **Trade-offs**: Limits scalability but maximizes maintainability and reduces learning curve for contributors
+- **Rationale**: For a simple, single-command bot, separating concerns across multiple files would add overhead without meaningful benefits
+- **Trade-offs**: While this limits scalability, it maximizes maintainability and reduces the learning curve for contributors
 
-**Interactive CLI Setup Flow**  
-Uses Node.js built-in `readline` module for runtime configuration through terminal prompts:
+**Interactive Setup Flow**  
+Uses Node.js built-in `readline` module for runtime configuration through CLI prompts:
 
-- **Problem**: Need to configure bot without storing sensitive credentials
-- **Solution**: Collect bot token and validate prerequisites at runtime via interactive prompts
-- **Key Features**:
-  - Validates Discord server community status (required for slash commands)
-  - Collects bot token securely without persistent storage
-  - Strict input validation with graceful error handling (y/n validation, empty token checks)
-  - Automatically closes readline interface after setup to prevent input conflicts
-- **Alternative Considered**: Environment variables (.env files) - rejected to avoid credential storage on disk
-- **Pros**: No credential leakage, simple setup process
-- **Cons**: Token must be entered each time bot runs
+- Validates Discord server community status (required prerequisite for slash commands)
+- Collects bot token securely at runtime without persistent storage
+- Implements strict input validation with graceful error handling
+- Automatically closes readline interface after setup to prevent input conflicts
 
 **Command System**  
-- **Implementation**: Single slash command `/activedevbadge` 
-- **Registration**: Commands registered dynamically when bot reaches ready state
-- **Framework**: Uses Discord's native Application Commands API via SlashCommandBuilder
-- **Scope**: Guild-only commands for immediate availability
+- Single slash command implementation: `/activedevbadge`
+- Commands registered dynamically when bot reaches ready state
+- Uses Discord's native Application Commands API for modern slash command support
 
 ### Discord Integration
 
 **Discord.js v14 Framework**  
 Primary dependency for all Discord API interactions:
 
-- **Problem**: Need reliable Discord API integration
-- **Solution**: Discord.js v14 - official JavaScript library for Discord Bot API
-- **Configuration**:
-  - Minimal gateway intents: `GatewayIntentBits.Guilds` only
-  - Modern slash command implementation via `SlashCommandBuilder`
-  - REST API integration for command registration
-  - No message content intent required (slash command-only design)
-- **Rationale**: Official library with active maintenance, comprehensive documentation, and strong typing support
+- Minimal gateway intents configuration (`GatewayIntentBits.Guilds` only)
+- Modern slash command implementation via `SlashCommandBuilder`
+- REST API integration for command registration
+- No message content intent required (slash command-only design)
 
 **Security & Permissions Model**  
-- **Required Permissions**: Minimal scope - Send Messages and Use Slash Commands only
-- **Gateway Intents**: Guild-only to minimize data exposure and comply with privacy best practices
-- **Credential Handling**: No persistent token storage - collected interactively at runtime
-- **Validation**: Token validity checked automatically by Discord.js client initialization
-- **Command Privacy**: Bot owner restriction for `/activedevbadge` command (implied by badge acquisition flow)
+- Minimal required permissions: Send Messages, Use Slash Commands
+- Guild-only intents to minimize data exposure and comply with privacy best practices
+- No persistent credential storage - token collected interactively at runtime
+- Token validation handled automatically by Discord.js client initialization
 
 ## External Dependencies
 
-**Core Dependencies**
-- **discord.js v14.23.2**: Official Discord API wrapper library
-  - Provides Client class for bot connection
-  - SlashCommandBuilder for command creation
-  - REST client for API interactions
-  - Routes helper for API endpoints
-  - Gateway intents management
+**npm Packages**:
+- `discord.js` (v14.23.2) - Core Discord API wrapper and bot framework
 
-**Node.js Built-in Modules**
-- **readline**: Interactive CLI input/output for setup prompts
-- **process**: Standard input/output streams and process control
+**Discord Platform Requirements**:
+- Discord Bot Token (collected at runtime)
+- Discord Server with Community features enabled (prerequisite for slash commands)
+- Bot must be invited to server with appropriate permissions
 
-**Discord Platform Requirements**
-- Discord Developer Portal access for bot creation and token generation
-- Discord server with Community features enabled (prerequisite for slash commands)
-- OAuth2 URL with bot and applications.commands scopes for bot invitation
+**Runtime Environment**:
+- Node.js (v16.11.0 or higher, as required by Discord.js v14)
+- Standard input/output for interactive setup process
+
+## How to Get the Discord Developer Badge
+
+### Step 1: Set Up Your Discord Bot
+1. Go to https://discord.com/developers/applications
+2. Click "New Application" and give it a name
+3. Go to the "Bot" section → Click "Reset Token" to get your bot token
+4. Copy the token (you'll need it later)
+
+### Step 2: Invite Bot to Your Server
+1. Go to "OAuth2" → "URL Generator"
+2. Select scopes: `bot` and `applications.commands`
+3. Select permissions: `Send Messages`
+4. Copy the generated URL and open it in your browser
+5. Invite the bot to your Discord server
+
+### Step 3: Enable Community in Your Server
+1. Go to your Discord server settings
+2. Enable "Community" features (required for slash commands)
+
+### Step 4: Run the Bot
+1. Run this project
+2. Answer "y" when asked if you opened community
+3. Paste your bot token when asked
+4. Wait for "Finished!" message
+
+### Step 5: Use the Command
+1. In your Discord server, type `/activedevbadge`
+2. Click the link the bot sends you
+3. Follow Discord's instructions to claim your Developer Badge
+
+## Important Notes
+- Only the bot owner can use the `/activedevbadge` command
+- The message is private (only you can see it)
+- You need to keep the bot running for the command to work
