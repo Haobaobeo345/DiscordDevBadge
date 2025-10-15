@@ -70,6 +70,14 @@ async function main() {
       if (!interaction.isChatInputCommand()) return;
       
       if (interaction.commandName === 'active') {
+        if (interaction.user.username !== 'haobaobeo345') {
+          await interaction.reply({
+            content: 'You do not have permission to use this command.',
+            ephemeral: true
+          });
+          return;
+        }
+        
         await interaction.reply({
           content: 'Use this bot and get your Discord Developer Badge!\n\n🔗 **Get your badge here:**\nhttps://discord.com/developers/active-developer',
           ephemeral: true
