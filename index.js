@@ -70,7 +70,9 @@ async function main() {
       if (!interaction.isChatInputCommand()) return;
       
       if (interaction.commandName === 'activedevbadge') {
-        if (interaction.user.username !== 'haobaobeo345') {
+        const application = await client.application.fetch();
+        
+        if (interaction.user.id !== application.owner.id) {
           await interaction.reply({
             content: 'You do not have permission to use this command.',
             ephemeral: true
