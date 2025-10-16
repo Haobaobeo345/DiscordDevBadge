@@ -81,7 +81,7 @@ async function main() {
         }
         
         await interaction.reply({
-          content: 'Use this bot and get your Discord Developer Badge!\n\n🔗 **Get your badge here:**\nhttps://discord.com/developers/active-developer',
+          content: 'Thank you for using this bot. Use this bot and get your Discord Developer Badge!\n\n🔗 **Get your badge here:**\nhttps://discord.com/developers/active-developer',
           ephemeral: true
         });
       }
